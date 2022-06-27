@@ -13,16 +13,28 @@ private Deck $deck;
 public function __construct(){
 
 $this->deck = new Deck(); 
+$this->deck->shuffle();
 $this->player = new Player($this->deck);
 $this->dealer = new Player($this->deck);
-$this->deck->shuffle();
 
 }
 
-public function getPlayer() : Player {}
+public function getPlayer() : Player {
 
-public function getDealer() : Dealer {}
+return $this->player;
 
-public function getDeck() : Deck {}
+}
+
+public function getDealer() : Player {
+
+return $this->dealer;
+
+}
+
+public function getDeck() : Deck {
+
+return $this->deck;
+
+}
 
 }

@@ -4,6 +4,34 @@ declare(strict_types=1);
 
 require './classes/Blackjack.php';
 
+session_start();
+
+$game;
+
+if(!isset($_SESSION["Blackjack"])){
+
+    echo "NO BLACKJACK SESSION FOUND";
+    $game = new Blackjack();
+    $_SESSION["Blackjack"] = $game;  
+
+} else {
+
+    echo "BLACKJACK GAME FOUND IN SESSION";
+    $game = $_SESSION["Blackjack"];
+    
+}
+
+
+
+
+// $game = new Blackjack();
+
+// $player = $game->getPlayer();
+// $dealer = $game->getDealer();
+// $deck = $game->getDeck();
+
+
+
 ?>
 
 
