@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+require './classes/Suit.php';
+require './classes/Card.php';
+
 class Deck
 {
     private const CARDS_PER_SUIT = 14;//including the knight card.

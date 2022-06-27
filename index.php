@@ -1,3 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+require './classes/Blackjack.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +16,6 @@
     <title>Document</title>
 </head>
 <body>
-        hi
+        
 </body>
 </html>
