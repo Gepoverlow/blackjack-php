@@ -11,6 +11,7 @@ private Player $player;
 private Dealer $dealer;
 private Deck $deck;
 private bool $gameOver;
+private string $commentator;
 
 public function __construct(){
 
@@ -52,22 +53,34 @@ $this->gameOver = $state;
     
 }
 
-public function checkWinner() : string{
+public function checkWinner() : void{
 
 $playerScore = $this->player->getScore();
 $dealerScore = $this->dealer->getScore();
 
 if ($playerScore > $dealerScore && $playerScore <= 21) {
-   return "Player wins!";
+   $this->commentator = "Player wins!";
   } else if ($playerScore > $dealerScore && $playerScore > 21) {
-    return "Dealer wins!";
+    $this->commentator = "Dealer wins!";
   } else if ($dealerScore > $playerScore && $dealerScore <= 21) {
-    return "Dealer wins!";
+    $this->commentator = "Dealer wins!";
   } else if ($dealerScore > $playerScore && $dealerScore > 21) {
-    return "Player wins!";
+    $this->commentator = "Player wins!";
   } else if ($dealerScore === $playerScore) {
-   return "Its a tie";
+    $this->commentator = "Its a tie";
   }
+}
+
+public function getCommentator(){
+
+return $this->commentator;
+
+}
+
+public function setCommentator(string $comment){
+
+$this->commentator = $comment;
+    
 }
 
 }
