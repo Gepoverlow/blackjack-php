@@ -51,13 +51,25 @@ $deck = $game->getDeck();
 
 <div id="player-score"> 
     
-<?php echo $player->getScore() ?>
+<?php 
+echo $player->getScore();
+foreach($player->getHandCards() AS $card){ 
+    echo $card->getUnicodeCharacter(true);
+ }
+
+?>
 
 </div>
 
 <div id="dealer-score">
 
-<?php echo $dealer->getScore() ?>
+<?php 
+echo $dealer->getScore();
+foreach($dealer->getHandCards() AS $card){ 
+    echo $card->getUnicodeCharacter(true);
+ }
+
+?>
 
 </div>
 

@@ -52,4 +52,10 @@ return $this->lost;
 
 }
 
+public function getHandCards(){
+
+return $this->cards;
+
+}
+
 }
