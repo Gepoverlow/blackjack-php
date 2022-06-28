@@ -15,12 +15,18 @@ parent::__construct($deck);
 
 public function hit(Deck $deck){
 
+if($this->getScore() < self::MIN_SCORE_DEALER) {
+
 do{
 
 parent::hit($deck);
-
+        
 } while($this->getScore() < self::MIN_SCORE_DEALER);
+        
+}
 
 }
+
+
 
 }

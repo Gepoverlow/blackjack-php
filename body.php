@@ -7,24 +7,24 @@ $dealer = $game->getDealer();
 $deck = $game->getDeck();
 
 if(isset($_POST["player-action-hit"])){
-
-// if(!$player->hasLost() && !$dealer->hasLost()){
         
 $player->hit($deck);
 
+if($player->getScore() > 21){
+
+$game->setGameOver(true);
+
 }
 
-//}
+}
 
 if(isset($_POST["player-action-stand"])){
 
-// if(!$dealer->hasLost() && !$player->hasLost()){
-
 $dealer->hit($deck);
-
-}
+echo $game->checkWinner();
+$game->setGameOver(true);
     
-//}
+}
 
 if(isset($_POST["player-action-surrender"])){
 
@@ -41,19 +41,18 @@ $deck = $game->getDeck();
 
 if(isset($_POST["player-action-restart"])){
 
-    unset($_SESSION["Blackjack"]);
+unset($_SESSION["Blackjack"]);
     
-    $game = new Blackjack();
-    $_SESSION["Blackjack"] = $game;
+$game = new Blackjack();
+$_SESSION["Blackjack"] = $game;
     
-    $player = $game->getPlayer();
-    $dealer = $game->getDealer();
-    $deck = $game->getDeck();
+$player = $game->getPlayer();
+$dealer = $game->getDealer();
+$deck = $game->getDeck();
             
 }
 
 ?>
-
 
 <body>
 
@@ -83,21 +82,17 @@ foreach($dealer->getHandCards() AS $card){
 
 <?php
 
- if(!$player->hasLost() && !$dealer->hasLost()) { 
+if($game->getGameover()){
+
+echo "Game is over! Restart to keep playing";
+include_once "game-over.php";
+    
+} elseif(!$game->getGameOver()){
 
 echo "Game is still alive...";
 include_once "game-alive.php";
 
- } elseif($player->hasLost() || $dealer->hasLost()){
-
-echo "Game is dead! Restart to keep playing";
-include_once "game-dead.php";
-
- }
-
-//  if($player->hasLost()) { echo "Dealer Wins!"; } 
-
-//  if($dealer->hasLost()) { echo "Player Wins!"; } 
+}
 
 
 ?>
