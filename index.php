@@ -6,18 +6,20 @@ require './classes/Blackjack.php';
 
 session_start();
 
-$game;
-
 if(!isset($_SESSION["Blackjack"])){
 
-    echo "NO BLACKJACK SESSION FOUND";
     $game = new Blackjack();
     $_SESSION["Blackjack"] = $game;  
+    
+    include_once "header.php";
+    include_once "body.php";
 
-} else {
+} elseif(isset($_SESSION["Blackjack"])) {
 
-    echo "BLACKJACK GAME FOUND IN SESSION";
     $game = $_SESSION["Blackjack"];
+
+    include_once "header.php";
+    include_once "body.php";
     
 }
 
@@ -35,15 +37,4 @@ if(!isset($_SESSION["Blackjack"])){
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-        
-</body>
-</html>
+
