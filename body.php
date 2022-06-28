@@ -8,28 +8,23 @@ $deck = $game->getDeck();
 
 if(isset($_POST["player-action-hit"])){
 
-    
-if(!$player->hasLost() && !$dealer->hasLost()){
+// if(!$player->hasLost() && !$dealer->hasLost()){
         
-echo "Player Hits";
 $player->hit($deck);
 
 }
 
-}
+//}
 
 if(isset($_POST["player-action-stand"])){
 
+// if(!$dealer->hasLost() && !$player->hasLost()){
 
-
-if(!$dealer->hasLost() && !$player->hasLost()){
-
-echo "Player Stands";
 $dealer->hit($deck);
 
 }
     
-}
+//}
 
 if(isset($_POST["player-action-surrender"])){
 
@@ -44,6 +39,19 @@ $deck = $game->getDeck();
         
 }
 
+if(isset($_POST["player-action-restart"])){
+
+    unset($_SESSION["Blackjack"]);
+    
+    $game = new Blackjack();
+    $_SESSION["Blackjack"] = $game;
+    
+    $player = $game->getPlayer();
+    $dealer = $game->getDealer();
+    $deck = $game->getDeck();
+            
+}
+
 ?>
 
 
@@ -52,11 +60,10 @@ $deck = $game->getDeck();
 <div id="player-score"> 
     
 <?php 
-echo $player->getScore();
+echo '<span> Player Score:' . $player->getScore() . '</span>';
 foreach($player->getHandCards() AS $card){ 
     echo $card->getUnicodeCharacter(true);
  }
-
 ?>
 
 </div>
@@ -64,11 +71,10 @@ foreach($player->getHandCards() AS $card){
 <div id="dealer-score">
 
 <?php 
-echo $dealer->getScore();
+echo '<span> Dealer Score:' . $dealer->getScore() . '</span>';
 foreach($dealer->getHandCards() AS $card){ 
     echo $card->getUnicodeCharacter(true);
  }
-
 ?>
 
 </div>
@@ -77,25 +83,27 @@ foreach($dealer->getHandCards() AS $card){
 
 <?php
 
- if(!$player->hasLost() && !$dealer->hasLost()) { echo "Game is still alive..."; } 
+ if(!$player->hasLost() && !$dealer->hasLost()) { 
 
- if($player->hasLost()) { echo "Dealer Wins!"; } 
+echo "Game is still alive...";
+include_once "game-alive.php";
 
- if($dealer->hasLost()) { echo "Player Wins!"; } 
+ } elseif($player->hasLost() || $dealer->hasLost()){
+
+echo "Game is dead! Restart to keep playing";
+include_once "game-dead.php";
+
+ }
+
+//  if($player->hasLost()) { echo "Dealer Wins!"; } 
+
+//  if($dealer->hasLost()) { echo "Player Wins!"; } 
 
 
 ?>
 
 
-</div>
-        
-<form action="index.php" method="post">
 
-<button name="player-action-hit" type="submit">HIT</button>
-<button name="player-action-stand" type="submit">STAND</button>
-<button name="player-action-surrender" type="submit">SURRENDER</button>
-
-</form>
 
 
 </body>
