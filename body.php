@@ -1,24 +1,46 @@
 <?php 
 
+require_once "./classes/Blackjack.php";
+
 $player = $game->getPlayer();
 $dealer = $game->getDealer();
 $deck = $game->getDeck();
 
 if(isset($_POST["player-action-hit"])){
 
+    
+if(!$player->hasLost() && !$dealer->hasLost()){
+        
 echo "Player Hits";
+$player->hit($deck);
+
+}
 
 }
 
 if(isset($_POST["player-action-stand"])){
 
+
+
+if(!$dealer->hasLost() && !$player->hasLost()){
+
 echo "Player Stands";
+$dealer->hit($deck);
+
+}
     
 }
 
 if(isset($_POST["player-action-surrender"])){
 
-echo "Player Surrenders";
+unset($_SESSION["Blackjack"]);
+
+$game = new Blackjack();
+$_SESSION["Blackjack"] = $game;
+
+$player = $game->getPlayer();
+$dealer = $game->getDealer();
+$deck = $game->getDeck();
         
 }
 
@@ -26,6 +48,34 @@ echo "Player Surrenders";
 
 
 <body>
+
+<div id="player-score"> 
+    
+<?php echo $player->getScore() ?>
+
+</div>
+
+<div id="dealer-score">
+
+<?php echo $dealer->getScore() ?>
+
+</div>
+
+<div>
+
+<?php
+
+ if(!$player->hasLost() && !$dealer->hasLost()) { echo "Game is still alive..."; } 
+
+ if($player->hasLost()) { echo "Dealer Wins!"; } 
+
+ if($dealer->hasLost()) { echo "Player Wins!"; } 
+
+
+?>
+
+
+</div>
         
 <form action="index.php" method="post">
 

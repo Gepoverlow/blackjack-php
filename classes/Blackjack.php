@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 require './classes/Deck.php';
 require './classes/Player.php';
+require './classes/Dealer.php';
 
 class Blackjack{
 
-public Player $player;
-private Player $dealer;
+private Player $player;
+private Dealer $dealer;
 private Deck $deck;
 
 public function __construct(){
@@ -15,7 +16,7 @@ public function __construct(){
 $this->deck = new Deck(); 
 $this->deck->shuffle();
 $this->player = new Player($this->deck);
-$this->dealer = new Player($this->deck);
+$this->dealer = new Dealer($this->deck);
 
 }
 
