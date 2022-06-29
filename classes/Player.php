@@ -7,10 +7,12 @@ private const MAX_SCORE = 21;
 
 private array $cards;
 private bool $lost;
+private bool $playerHasStood;
 
 public function __construct(Deck $deck){
 
 $this->lost = false;
+$this->playerHasStood = false;
 $this->cards = [];
 array_push($this->cards, $deck->drawCard(), $deck->drawCard());
 
@@ -56,6 +58,18 @@ public function getHandCards(){
 
 return $this->cards;
 
+}
+
+public function getPlayerHasStood(){
+
+return $this->playerHasStood;
+
+}
+
+public function setPlayerHasStood(bool $standStatus){
+
+$this->playerHasStood = $standStatus;
+    
 }
 
 }

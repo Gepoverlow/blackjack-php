@@ -23,17 +23,6 @@ if(!isset($_SESSION["Blackjack"])){
     
 }
 
-
-
-
-// $game = new Blackjack();
-
-// $player = $game->getPlayer();
-// $dealer = $game->getDealer();
-// $deck = $game->getDeck();
-
-
-
 ?>
 
 

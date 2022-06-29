@@ -17,6 +17,8 @@ $game->setCommentator("Went too High! Dealer Wins");
 
 }
 
+$dealer->printHidden();
+
 }
 
 if(isset($_POST["player-action-stand"])){
@@ -24,6 +26,7 @@ if(isset($_POST["player-action-stand"])){
 $dealer->hit($deck);
 $game->checkWinner();
 $game->setGameOver(true);
+$game->getPlayer()->setPlayerHasStood(true);
     
 }
 
@@ -76,12 +79,33 @@ echo $card->getUnicodeCharacter(true);
 
 <div id="dealer-score">
 <?php 
+
+if(!$game->getPlayer()->getPlayerHasStood()){
+
+echo '<span> Dealer Score:' . $game->getDealer()->getHandCards()[0]->getValue() . '</span>';
+
+} elseif($game->getPlayer()->getPlayerHasStood()){
+
 echo '<span> Dealer Score:' . $dealer->getScore() . '</span>';
+
+}
+
 ?>
 <div id="dealer-cards">
 <?php
-foreach($dealer->getHandCards() AS $card){ 
-echo $card->getUnicodeCharacter(true);
+
+if(!$game->getPlayer()->getPlayerHasStood()){
+
+echo $game->getDealer()->getHandCards()[0]->getUnicodeCharacter(true);
+echo '<span style="color: %s; font-size: clamp(8rem, 9vw, 10rem);">' . $game->getDealer()->printHidden() . '</span>';
+
+} elseif ($game->getPlayer()->getPlayerHasStood()){
+
+    foreach($dealer->getHandCards() AS $card){ 
+    echo $card->getUnicodeCharacter(true);
+
+}
+
  }
 ?>
 </div>
