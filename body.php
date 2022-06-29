@@ -2,6 +2,7 @@
 
 require_once "./classes/Blackjack.php";
 
+
 $player = $game->getPlayer();
 $dealer = $game->getDealer();
 $deck = $game->getDeck();
@@ -66,7 +67,7 @@ $deck = $game->getDeck();
 
 <div id="player-score"> 
 <?php 
-echo '<span> Player Score:' . $player->getScore() . '</span>';
+echo '<span> Player Score: ' . $player->getScore() . '</span>';
 ?>
 <div id="player-cards">
 <?php
@@ -82,11 +83,11 @@ echo $card->getUnicodeCharacter(true);
 
 if(!$game->getPlayer()->getPlayerHasStood()){
 
-echo '<span> Dealer Score:' . $game->getDealer()->getHandCards()[0]->getValue() . '</span>';
+echo '<span> Dealer Score: ' . $game->getDealer()->getHandCards()[0]->getValue() . '</span>';
 
 } elseif($game->getPlayer()->getPlayerHasStood()){
 
-echo '<span> Dealer Score:' . $dealer->getScore() . '</span>';
+echo '<span> Dealer Score: ' . $dealer->getScore() . '</span>';
 
 }
 
@@ -116,13 +117,14 @@ echo '<span style="color: %s; font-size: clamp(8rem, 9vw, 10rem);">' . $game->ge
 <div>
 <?php
 if($game->getGameover()){
-echo "Game is over! Restart to keep playing";
+echo '<span class="game-state-message">' . "Game is over! Restart to keep playing" . '</span>';
 include_once "game-over.php";   
 } elseif(!$game->getGameOver()){
-echo "Game is still alive...";
+echo '<span class="game-state-message">' . "Game is still alive..." . '</span>';
 include_once "game-alive.php";
 }
 ?>
+
 
 <div>
 <?php 
